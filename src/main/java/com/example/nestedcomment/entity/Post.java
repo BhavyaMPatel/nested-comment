@@ -1,4 +1,4 @@
-package com.example.nestedcomment.Entity;
+package com.example.nestedcomment.entity;
 
 import jakarta.persistence.*;
 
