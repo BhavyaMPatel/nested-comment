@@ -25,9 +25,7 @@ public class PostService {
     }
 
     public List<Post> findPostsByUserId(int id){
-        List<Post> a = postRepository.findPostsByCreatedBy_Id(id);
-        System.out.println("s"+a.size());
-        return a;
+        return postRepository.findPostsByCreatedBy_Id(id);
     }
 
     public String addPost(int createdBy) throws Exception {
