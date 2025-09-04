@@ -1,5 +1,7 @@
 package com.example.nestedcomment.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -18,10 +20,12 @@ public class User {
 
     @OneToMany
     @JoinColumn(name = "comment_by")
+    @JsonManagedReference
     private Set<Comment> comments = new LinkedHashSet<>();
 
     @OneToMany
     @JoinColumn(name = "created_by")
+    @JsonManagedReference
     private Set<Post> posts = new LinkedHashSet<>();
 
     public Integer getId() {

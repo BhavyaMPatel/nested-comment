@@ -1,8 +1,12 @@
 package com.example.nestedcomment.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -16,6 +20,7 @@ public class Post {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by")
+    @JsonBackReference
     private User createdBy;
 
     @Column(name = "created_at")
@@ -23,6 +28,7 @@ public class Post {
 
     @OneToMany
     @JoinColumn(name = "comment_on")
+    @JsonManagedReference
     private Set<Comment> comments = new LinkedHashSet<>();
 
     public Integer getId() {
@@ -41,7 +47,7 @@ public class Post {
         this.createdBy = createdBy;
     }
 
-    public Instant getCreatedAt() {
+    public Instant getCreatedAt(Date date) {
         return createdAt;
     }
 
@@ -55,6 +61,15 @@ public class Post {
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", createdBy=" + createdBy +
+                ", createdAt=" + createdAt +
+                '}';
     }
 
 }
